@@ -34,7 +34,7 @@ function renderBooks() {
     const authorP = document.createElement("p");
     const author = document.createTextNode(element.author);
     const puplisherP = document.createElement("p");
-    const puplisher = document.createTextNode(element.puplisher);
+    const puplisher = document.createTextNode(element.publisher);
     const priceP = document.createElement("p");
     const price = document.createTextNode(element.price);
     const pagesP = document.createElement("p");
