@@ -5,3 +5,8 @@
 body {
   margin: 0;
 }
+
+.container-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
