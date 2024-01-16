@@ -1,24 +1,63 @@
-// includes function to add a book to favorites
-// includes function to delete a book from favorites
-// includes function to load and show the list of favorites
+let favorites = JSON.parse(localStorage.getItem("Favourite Books")) || [];
 
-// CRUD Local-Storage
-
-function getFavBooks() {
-  return localStorage.getItem("Favourite Books");
+//add or remove book to/from fav-list
+function toggleFavorite(bookId) {
+  const index = favorites.indexOf(bookId); //find index of book in array
+  if (index === -1) {
+    //if not there, push in
+    favorites.push(bookId);
+  } else {
+    //if there, take out
+    favorites.splice(index, 1);
+  }
+  updateLocalStorage();
+  updateFavoriteButton(bookId);
 }
 
-function addFavBook(data) {
-  localStorage.setItem("Favourite Books", data);
+//saves fav-array to local storage (needs to be string)
+function updateLocalStorage() {
+  localStorage.setItem("Favourite Books", JSON.stringify(favorites));
 }
 
-// function deleteFavBook(isbn) {
-//   const data = localStorage.getItem("Favourite Books");
-//   filterFavBooks(data, isbn);
-// }
+//Change button label
+function updateFavoriteButton(bookId) {
+  const button = document.querySelector(`.btn-favorites[data-id="${bookId}"]`); //for each id seperately
+  if (favorites.includes(bookId)) {
+    button.textContent = "Added to Favorites";
+  } else {
+    button.textContent = "Add to Favorites";
+  }
+}
+//list all fav-books
+function displayFavorites() {
+  const container = document.getElementById("favoritesList");
+  container.innerHTML = ""; // Clear existing content
 
-// // helper functions
+  // Iterate over each ISBN in the favorites array
+  favorites.forEach((isbn) => {
+    fetch(`/books/${isbn}`)
+      .then((response) => response.json())
+      .then((bookData) => {
+        // Create and append the book element to the container
+        const bookElement = document.createElement("div");
+        bookElement.textContent = `Book: ${bookData.title} (ISBN: ${isbn})`;
+        container.appendChild(bookElement);
+      })
+      .catch((error) => {
+        console.error("Error fetching book details:", error);
+      });
+  });
+}
 
-// function filterFavBooks(books, isbn) {
-//   return books.filter((x) => x.isbn === isbn);
-// }
+// Event listeners for adding/removing favorites
+document.addEventListener("click", function (e) {
+  if (e.target && e.target.classList.contains("btn-favorites")) {
+    const bookId = e.target.getAttribute("data-id");
+    toggleFavorite(bookId);
+  }
+});
+
+// check if you are on favorites site
+if (window.location.pathname.includes("favorites.html")) {
+  displayFavorites();
+}
