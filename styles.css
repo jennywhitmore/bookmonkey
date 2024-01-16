@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "KaushanScript-Regular";
+  src: url(assets/KaushanScript-Regular.otf) format("truetype");
+}
+
 .header-background,
 .header-background * {
   box-sizing: border-box;
@@ -72,4 +77,8 @@
   padding: 6px 24px 6px 24px;
   display: flex;
   overflow: hidden;
+}
+
+a {
+  text-decoration: none;
 }
