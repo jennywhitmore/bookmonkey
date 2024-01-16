@@ -1,0 +1,182 @@
+@font-face {
+  font-family: "KaushanScript-Regular";
+  src: url(assets/KaushanScript-Regular.otf) format("truetype");
+}
+
+a,
+button,
+input,
+select,
+h1,
+h2,
+h3,
+h4,
+h5,
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: none;
+  text-decoration: none;
+  appearance: none;
+  background: none;
+
+  -webkit-font-smoothing: antialiased;
+}
+
+.header-background,
+.header-background * {
+  box-sizing: border-box;
+}
+
+.header-background {
+  padding: 0 80px 0 50px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: #ffffff;
+  border-style: solid;
+  border-color: #b5446e;
+  border-width: 0px 0px 1px 0px;
+  top: 0;
+  width: 100%;
+  height: 150px;
+  position: fixed;
+}
+
+.main-background * {
+  box-sizing: border-box;
+}
+
+.main-background {
+  background: #ebf6fe;
+  width: 100%;
+  position: relative;
+}
+
+.bookmonkey,
+.bookmonkey * {
+  box-sizing: border-box;
+}
+
+.bookmonkey {
+  color: #b5446e;
+  font-family: "KaushanScript-Regular", sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+  position: relative;
+}
+
+.nav-item-1,
+.nav-item-1 * {
+  box-sizing: border-box;
+}
+
+.nav-item-1 {
+  margin-left: auto;
+  background: #ffffff;
+  border-radius: 4px;
+  border-style: solid;
+  border-color: #b5446e;
+  border-width: 1px;
+  padding: 6px 24px 6px 24px;
+  overflow: hidden;
+}
+
+.nav-item-2,
+.nav-item-2 * {
+  box-sizing: border-box;
+}
+.nav-item-2 {
+  background: #ffffff;
+  border-radius: 4px;
+  border-style: solid;
+  border-color: #b5446e;
+  border-width: 1px;
+  padding: 6px 24px 6px 24px;
+  display: flex;
+  overflow: hidden;
+}
+.favorites {
+  color: #525252;
+  text-align: left;
+  font-family: "OpenSans-Regular", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  position: relative;
+}
+
+.book-card,
+.book-card * {
+  box-sizing: border-box;
+}
+.book-card {
+  background: #ffffff;
+  margin: 238px 64px 159px 80px;
+  border-radius: 9px;
+  padding: 16px;
+  width: 1152px;
+  height: 435px;
+  position: relative;
+}
+
+_.book-cover *,
+_.book-cover {
+  box-sizing: border-box;
+}
+
+.book-cover {
+  margin: 16px 915px 161px 16px;
+  width: 221px;
+  height: 258px;
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  overflow: visible;
+  object-fit: cover;
+}
+
+.headline {
+  color: #b5446e;
+  text-align: left;
+  font-family: "OpenSans-Bold", sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  position: absolute;
+  left: 421px;
+  top: 16px;
+}
+
+.author {
+  color: #525252;
+  text-align: left;
+  font-family: "OpenSans-Bold", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  position: absolute;
+  left: 421px;
+  top: 60px;
+}
+
+.isbn {
+  color: #525252;
+  text-align: left;
+  font-family: "OpenSans-Bold", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  position: absolute;
+  left: 421px;
+  top: 82px;
+}
+
+.book-description {
+  color: #525252;
+  text-align: left;
+  font-family: "OpenSans-Regular", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  position: absolute;
+  left: 421px;
+  top: 126px;
+  width: 710px;
+}
