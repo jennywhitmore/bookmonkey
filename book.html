@@ -4,23 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="book-styles.css">
+
     <title>Book details</title>
 
 </head>
 
-<body>
-    <header>
-        <!-- Navigation Bar -->
+<body class="main-background">
+    <header class="header-background">
+        <h1 class="bookmonkey">Bookmonkey</h1>
+        <button type="button" class="nav-item-1">All Books</button>
+        <button type="button" class="nav-item-2">Favorites</button>
     </header>
 
-    <main>
-        <!-- Details of Book -->
-    </main>
+    <!--  only for JavaScript Naming, replace for dynamic content -->
+    <article class="book-card">
+        <div class="book-cover">
+            <img class="book-cover" src="https://source.unsplash.com/random" alt="Bookcover">
+        </div>
+        <div class="book-content">
+            <h2 class="headline">Practical Rust Web Projects</h2>
+            <p class="author">Shing Liu</p>
+            <p class="isbn">ISBN:39393030303</p>
+            <p class="book-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa sint corrupti
+                dicta
+                cumque illum animi
+                placeat, inventore labore maiores fugiat molestiae ducimus deserunt aliquam ipsam aspernatur vero saepe,
+                ipsum rem?</p>
+        </div>
 
-    <footer>
-        <!-- Footer -->
-    </footer>
+    </article>
+    </header>
+
     <script src="bookDetails.js"></script>
 </body>
 
