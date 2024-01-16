@@ -3,8 +3,6 @@
 //includes function to load all books from the api
 //includes functions to navigate around the app
 
-import { sayHello } from "./utils.js";
-
 const list = document.getElementById("list");
 const url = "http://localhost:4730/books/";
 
@@ -22,9 +20,9 @@ async function getAllBooks() {
 
 function renderBooks() {
   list.innerHTML = "";
-  console.log(books);
   books.forEach((element) => {
     const newDiv = document.createElement("div");
+    const newA = document.createElement("a");
     const newH2 = document.createElement("h2");
     const headlineText = document.createTextNode(element.title);
     const newh4 = document.createElement("h4");
@@ -40,8 +38,11 @@ function renderBooks() {
     const pagesP = document.createElement("p");
     const pages = document.createTextNode(element.numPages);
     const newImg = document.createElement("img");
+    const btn = document.createElement("button");
     list.appendChild(newDiv);
-    newDiv.appendChild(newH2);
+    newDiv.appendChild(newA);
+    newA.appendChild(newH2);
+    newA.href = "book.html" + "?" + element.isbn;
     newH2.appendChild(headlineText);
     newDiv.appendChild(newh4);
     newh4.appendChild(subheadlineText);
@@ -57,8 +58,16 @@ function renderBooks() {
     pagesP.appendChild(pages);
     newDiv.appendChild(newImg);
     newImg.src = element.cover;
+    newDiv.appendChild(btn);
+    btn.innerText = "Favorisieren";
   });
 }
+
+// events
+
+list.addEventListener("click", (event) => {
+  console.log(event);
+});
 
 // initialization
 

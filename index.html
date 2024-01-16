@@ -5,11 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index-styles.css">
+    <link rel="stylesheet" href="styles.css">
     <title>Bookmonkey App</title>
 </head>
 
 <body>
-    <main>
+    <header class="header-background">
+        <a href="/">
+            <h1 class="bookmonkey">Bookmonkey</h1>
+        </a>
+        <a href="index.html" class="nav-item-1">All Books</a>
+        <a href="favorites.html" class="nav-item-2">Favorites</a>
+    </header>
+    <main class="main-background">
         <div class="container-flex" id="list"></div>
     </main>
     <script src="main.js" type="module"></script>
