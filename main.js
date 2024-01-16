@@ -22,21 +22,26 @@ function renderBooks() {
   list.innerHTML = "";
   books.forEach((element) => {
     const newDiv = document.createElement("div");
+    newDiv.classList = "card";
     const newA = document.createElement("a");
     const newH2 = document.createElement("h2");
     const headlineText = document.createTextNode(element.title);
     const newh4 = document.createElement("h4");
     const subheadlineText = document.createTextNode(element.subtitle);
-    const abstractP = document.createElement("p");
-    const abstract = document.createTextNode(element.abstract);
+    const anotherDiv = document.createElement("div");
+    const div3 = document.createElement("div");
     const authorP = document.createElement("p");
-    const author = document.createTextNode(element.author);
+    const author = document.createTextNode("Author: " + element.author);
     const puplisherP = document.createElement("p");
-    const puplisher = document.createTextNode(element.publisher);
+    const puplisher = document.createTextNode(
+      "Publisher: " + element.publisher
+    );
     const priceP = document.createElement("p");
-    const price = document.createTextNode(element.price);
+    const price = document.createTextNode("Price: " + element.price);
     const pagesP = document.createElement("p");
-    const pages = document.createTextNode(element.numPages);
+    const pages = document.createTextNode(
+      "Number of Pages: " + element.numPages
+    );
     const newImg = document.createElement("img");
     const btn = document.createElement("button");
     list.appendChild(newDiv);
@@ -46,20 +51,19 @@ function renderBooks() {
     newH2.appendChild(headlineText);
     newDiv.appendChild(newh4);
     newh4.appendChild(subheadlineText);
-    newDiv.appendChild(abstractP);
-    abstractP.appendChild(abstract);
-    newDiv.appendChild(abstractP);
+    newDiv.appendChild(anotherDiv);
+    anotherDiv.classList = "details-and-cover";
+    anotherDiv.appendChild(div3);
+    div3.append(authorP, puplisherP, priceP, pagesP);
     authorP.appendChild(author);
-    newDiv.appendChild(puplisherP);
     puplisherP.appendChild(puplisher);
-    newDiv.appendChild(priceP);
     priceP.appendChild(price);
-    newDiv.appendChild(pagesP);
     pagesP.appendChild(pages);
-    newDiv.appendChild(newImg);
+    anotherDiv.appendChild(newImg);
     newImg.src = element.cover;
     newDiv.appendChild(btn);
-    btn.innerText = "Favorisieren";
+    btn.innerText = "♥️ Add To Favorites";
+    btn.classList = "favBtn";
   });
 }
 
