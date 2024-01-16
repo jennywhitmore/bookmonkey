@@ -58,6 +58,14 @@ _.book-cover {
   object-fit: cover;
 }
 
+.book-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: red;
+}
+
 .headline {
   color: #b5446e;
   text-align: left;
