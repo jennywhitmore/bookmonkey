@@ -1,17 +1,17 @@
 let favorites = JSON.parse(localStorage.getItem("Favourite Books")) || [];
 
 //add or remove book to/from fav-list
-function toggleFavorite(bookId) {
-  const index = favorites.indexOf(bookId); //find index of book in array
+function toggleFavorite(isbn) {
+  const index = favorites.indexOf(isbn); //find index of book in array
   if (index === -1) {
     //if not there, push in
-    favorites.push(bookId);
+    favorites.push(isbn);
   } else {
     //if there, take out
     favorites.splice(index, 1);
   }
   updateLocalStorage();
-  updateFavoriteButton(bookId);
+  updateFavoriteButton(isbn);
 }
 
 //saves fav-array to local storage (needs to be string)
@@ -20,14 +20,15 @@ function updateLocalStorage() {
 }
 
 //Change button label
-function updateFavoriteButton(bookId) {
-  const button = document.querySelector(`.btn-favorites[data-id="${bookId}"]`); //for each id seperately
-  if (favorites.includes(bookId)) {
+function updateFavoriteButton(isbn) {
+  const button = document.querySelector(`.btn-favorites[data-id="${isbn}"]`); //for each id seperately
+  if (favorites.includes(isbn)) {
     button.textContent = "Added to Favorites";
   } else {
     button.textContent = "Add to Favorites";
   }
 }
+
 //list all fav-books
 function displayFavorites() {
   const container = document.getElementById("favoritesList");
@@ -35,11 +36,13 @@ function displayFavorites() {
 
   // Iterate over each ISBN in the favorites array
   favorites.forEach((isbn) => {
-    fetch(`/books/${isbn}`)
+    console.log("hallohallo");
+    fetch(`http://localhost:4730/books/${isbn}`)
       .then((response) => response.json())
       .then((bookData) => {
+        console.log(bookData);
         // Create and append the book element to the container
-        const bookElement = document.createElement("div");
+        const bookElement = document.createElement("p");
         bookElement.textContent = `Book: ${bookData.title} (ISBN: ${isbn})`;
         container.appendChild(bookElement);
       })
@@ -51,13 +54,11 @@ function displayFavorites() {
 
 // Event listeners for adding/removing favorites
 document.addEventListener("click", function (e) {
+  console.log(e);
   if (e.target && e.target.classList.contains("btn-favorites")) {
-    const bookId = e.target.getAttribute("data-id");
-    toggleFavorite(bookId);
+    const isbn = e.target.getAttribute("data-id");
+    toggleFavorite(isbn);
   }
 });
 
-// check if you are on favorites site
-if (window.location.pathname.includes("favorites.html")) {
-  displayFavorites();
-}
+displayFavorites();
