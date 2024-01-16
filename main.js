@@ -21,7 +21,6 @@ async function getAllBooks() {
 // rendering
 
 function renderBooks() {
-  console.log(list);
   list.innerHTML = "";
   console.log(books);
   books.forEach((element) => {
@@ -67,7 +66,6 @@ function init() {
   getAllBooks().then(() => {
     renderBooks();
   });
-  sayHello();
 }
 
 init();
