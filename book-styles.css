@@ -1,8 +1,3 @@
-@font-face {
-  font-family: "KaushanScript-Regular";
-  src: url(assets/KaushanScript-Regular.otf) format("truetype");
-}
-
 a,
 button,
 input,
@@ -61,6 +56,14 @@ _.book-cover {
   top: 16px;
   overflow: visible;
   object-fit: cover;
+}
+
+.book-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: red;
 }
 
 .headline {
