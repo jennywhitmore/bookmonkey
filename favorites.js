@@ -21,11 +21,14 @@ function updateLocalStorage() {
 
 //Change button label
 function updateFavoriteButton(isbn) {
-  const button = document.querySelector(`.btn-favorites[data-id="${isbn}"]`); //for each id seperately
+  const button = document.querySelector(`button[data-id="${isbn}"]`);
+  console.log(button);
   if (favorites.includes(isbn)) {
-    button.textContent = "Added to Favorites";
+    button.textContent = "💔 Remove from Favorites";
+    button.classList.add("added-to-fav");
   } else {
-    button.textContent = "Add to Favorites";
+    button.textContent = "♥️ Add To Favorites";
+    button.classList.remove("added-to-fav");
   }
 }
 
@@ -33,18 +36,68 @@ function updateFavoriteButton(isbn) {
 function displayFavorites() {
   const container = document.getElementById("favoritesList");
   container.innerHTML = ""; // Clear existing content
-
+  if (favorites.length === 0) {
+    const placeholder = document.createElement("p");
+    const placeholderText = document.createTextNode("no favorites yet");
+    placeholder.appendChild(placeholderText);
+    container.appendChild(placeholder);
+  }
   // Iterate over each ISBN in the favorites array
   favorites.forEach((isbn) => {
-    console.log("hallohallo");
     fetch(`http://localhost:4730/books/${isbn}`)
       .then((response) => response.json())
       .then((bookData) => {
-        console.log(bookData);
         // Create and append the book element to the container
-        const bookElement = document.createElement("p");
-        bookElement.textContent = `Book: ${bookData.title} (ISBN: ${isbn})`;
-        container.appendChild(bookElement);
+        const newDiv = document.createElement("div");
+        newDiv.classList = "card";
+        const newA = document.createElement("a");
+        const newH2 = document.createElement("h2");
+        const headlineText = document.createTextNode(bookData.title);
+        const newh4 = document.createElement("h4");
+        const subheadlineText = document.createTextNode(bookData.subtitle);
+        const anotherDiv = document.createElement("div");
+        const div3 = document.createElement("div");
+        const authorP = document.createElement("p");
+        const author = document.createTextNode("Author: " + bookData.author);
+        const puplisherP = document.createElement("p");
+        const puplisher = document.createTextNode(
+          "Publisher: " + bookData.publisher
+        );
+        const priceP = document.createElement("p");
+        const price = document.createTextNode("Price: " + bookData.price);
+        const pagesP = document.createElement("p");
+        const pages = document.createTextNode(
+          "Number of Pages: " + bookData.numPages
+        );
+        const newImg = document.createElement("img");
+
+        //changes made here
+        const btn = document.createElement("button");
+        btn.innerText = "♥️ Add To Favorites";
+        btn.classList = "btn-favorites";
+        btn.setAttribute("data-id", bookData.isbn); //Add data-id attribute to button
+        if (favorites.includes(bookData.isbn)) {
+          btn.classList.add("added-to-fav");
+          btn.innerText = "💔 Remove from Favorites";
+        }
+        newDiv.appendChild(btn);
+        container.appendChild(newDiv);
+        newDiv.appendChild(newA);
+        newA.appendChild(newH2);
+        newA.href = "book.html" + "?" + bookData.isbn;
+        newH2.appendChild(headlineText);
+        newDiv.appendChild(newh4);
+        newh4.appendChild(subheadlineText);
+        newDiv.appendChild(anotherDiv);
+        anotherDiv.classList = "details-and-cover";
+        anotherDiv.appendChild(div3);
+        div3.append(authorP, puplisherP, priceP, pagesP);
+        authorP.appendChild(author);
+        puplisherP.appendChild(puplisher);
+        priceP.appendChild(price);
+        pagesP.appendChild(pages);
+        anotherDiv.appendChild(newImg);
+        newImg.src = bookData.cover;
       })
       .catch((error) => {
         console.error("Error fetching book details:", error);
@@ -58,6 +111,7 @@ document.addEventListener("click", function (e) {
   if (e.target && e.target.classList.contains("btn-favorites")) {
     const isbn = e.target.getAttribute("data-id");
     toggleFavorite(isbn);
+    displayFavorites();
   }
 });
 

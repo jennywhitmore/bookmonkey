@@ -43,7 +43,17 @@ function renderBooks() {
       "Number of Pages: " + element.numPages
     );
     const newImg = document.createElement("img");
+
+    //changes made here
     const btn = document.createElement("button");
+    btn.innerText = "♥️ Add To Favorites";
+    btn.classList = "btn-favorites";
+    btn.setAttribute("data-id", element.isbn); //Add data-id attribute to button
+    if (favorites.includes(element.isbn)) {
+      btn.classList.add("added-to-fav");
+      btn.innerText = "💔 Remove from Favorites";
+    }
+    newDiv.appendChild(btn);
     list.appendChild(newDiv);
     newDiv.appendChild(newA);
     newA.appendChild(newH2);
@@ -61,16 +71,19 @@ function renderBooks() {
     pagesP.appendChild(pages);
     anotherDiv.appendChild(newImg);
     newImg.src = element.cover;
-    newDiv.appendChild(btn);
-    btn.innerText = "♥️ Add To Favorites";
-    btn.classList = "favBtn";
   });
 }
 
 // events
 
 list.addEventListener("click", (event) => {
-  console.log(event);
+  console.log(event.target.attributes[1].nodeValue);
+  if (
+    event.target.className === "btn-favorites" ||
+    "btn-favorites added-to-fav"
+  ) {
+    toggleFavorite(event.target.attributes[1].nodeValue);
+  }
 });
 
 // initialization
@@ -82,3 +95,34 @@ function init() {
 }
 
 init();
+
+let favorites = JSON.parse(localStorage.getItem("Favourite Books")) || [];
+
+function toggleFavorite(isbn) {
+  const index = favorites.indexOf(isbn); //find index of book in array
+  if (index === -1) {
+    //if not there, push in
+    favorites.push(isbn);
+  } else {
+    //if there, take out
+    favorites.splice(index, 1);
+  }
+  updateLocalStorage();
+  updateFavoriteButton(isbn);
+}
+
+function updateLocalStorage() {
+  localStorage.setItem("Favourite Books", JSON.stringify(favorites));
+}
+
+function updateFavoriteButton(isbn) {
+  const button = document.querySelector(`button[data-id="${isbn}"]`);
+  console.log(button);
+  if (favorites.includes(isbn)) {
+    button.textContent = "💔 Remove from Favorites";
+    button.classList.add("added-to-fav");
+  } else {
+    button.textContent = "♥️ Add To Favorites";
+    button.classList.remove("added-to-fav");
+  }
+}
