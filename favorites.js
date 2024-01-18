@@ -1,4 +1,5 @@
 let favorites = JSON.parse(localStorage.getItem("Favourite Books")) || [];
+const placeholder = document.querySelector(".message");
 
 //add or remove book to/from fav-list
 function toggleFavorite(isbn) {
@@ -36,11 +37,17 @@ function updateFavoriteButton(isbn) {
 function displayFavorites() {
   const container = document.getElementById("favoritesList");
   container.innerHTML = ""; // Clear existing content
+  if (favorites.length !== 0) {
+    placeholder.innerHTML = "";
+    placeholder.classList = "";
+  }
   if (favorites.length === 0) {
-    const placeholder = document.createElement("p");
+    const placeholderP = document.createElement("p");
     const placeholderText = document.createTextNode("no favorites yet");
-    placeholder.appendChild(placeholderText);
-    container.appendChild(placeholder);
+    placeholderP.appendChild(placeholderText);
+    placeholderP.classList = "no-favorites";
+    placeholder.appendChild(placeholderP);
+    placeholder.classList = "message";
   }
   // Iterate over each ISBN in the favorites array
   favorites.forEach((isbn) => {
