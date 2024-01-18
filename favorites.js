@@ -1,7 +1,8 @@
-let favorites = JSON.parse(localStorage.getItem("Favourite Books")) || [];
+export let favorites =
+  JSON.parse(localStorage.getItem("Favourite Books")) || [];
 
 //add or remove book to/from fav-list
-function toggleFavorite(isbn) {
+export function toggleFavorite(isbn) {
   const index = favorites.indexOf(isbn); //find index of book in array
   if (index === -1) {
     //if not there, push in
@@ -30,7 +31,7 @@ function updateFavoriteButton(isbn) {
 }
 
 //list all fav-books
-function displayFavorites() {
+export function displayFavorites() {
   const container = document.getElementById("favoritesList");
   container.innerHTML = ""; // Clear existing content
 

@@ -3,6 +3,11 @@
 //includes function to load all books from the api
 //includes functions to navigate around the app
 
+//changes made here
+//import toggleFavorites
+import { toggleFavorites } from "./favoritess.js";
+//changes done
+
 const list = document.getElementById("list");
 const url = "http://localhost:4730/books/";
 
@@ -43,7 +48,19 @@ function renderBooks() {
       "Number of Pages: " + element.numPages
     );
     const newImg = document.createElement("img");
+
+    //changes made here
     const btn = document.createElement("button");
+    btn.innerText = "♥️ Add To Favorites";
+    btn.classList = "favBtn";
+    btn.setAttribute("data-id", element.isbn); //Add data-id attribute to button
+    btn.addEventListener("click", function () {
+      //Add event listener
+      toggleFavorite(element.isbn);
+    });
+    newDiv.appendChild(btn);
+    //changes finish
+
     list.appendChild(newDiv);
     newDiv.appendChild(newA);
     newA.appendChild(newH2);
@@ -61,9 +78,6 @@ function renderBooks() {
     pagesP.appendChild(pages);
     anotherDiv.appendChild(newImg);
     newImg.src = element.cover;
-    newDiv.appendChild(btn);
-    btn.innerText = "♥️ Add To Favorites";
-    btn.classList = "favBtn";
   });
 }
 
