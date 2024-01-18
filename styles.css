@@ -62,6 +62,7 @@
   border-width: 1px;
   padding: 6px 24px 6px 24px;
   overflow: hidden;
+  color: #525252;
 }
 
 .nav-item-2,
@@ -77,10 +78,20 @@
   padding: 6px 24px 6px 24px;
   display: flex;
   overflow: hidden;
+  color: #525252;
+}
+
+.active {
+  background-color: #badefc;
+  border: none;
 }
 
 a {
   text-decoration: none;
+}
+
+a:visited {
+  color: #525252;
 }
 
 a:has(h2) {
@@ -90,6 +101,10 @@ a:has(h2) {
   font-size: 16px;
   font-weight: 700;
   text-align: center;
+}
+
+a:has(h2):visited {
+  color: #b5446e;
 }
 
 .container-flex {
@@ -126,7 +141,7 @@ img {
   height: 150px;
 }
 
-.favBtn {
+.btn-favorites {
   border-radius: 3px;
   border: 2px solid #b5446e;
   background: #fff;
@@ -136,4 +151,9 @@ img {
   width: 200px;
   cursor: pointer;
   padding: 5px;
+}
+
+.added-to-fav {
+  background-color: #b5446e;
+  color: #fff;
 }

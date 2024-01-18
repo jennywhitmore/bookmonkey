@@ -3,11 +3,6 @@
 //includes function to load all books from the api
 //includes functions to navigate around the app
 
-//changes made here
-//import toggleFavorites
-import { toggleFavorites } from "./favoritess.js";
-//changes done
-
 const list = document.getElementById("list");
 const url = "http://localhost:4730/books/";
 
@@ -52,15 +47,13 @@ function renderBooks() {
     //changes made here
     const btn = document.createElement("button");
     btn.innerText = "♥️ Add To Favorites";
-    btn.classList = "favBtn";
+    btn.classList = "btn-favorites";
     btn.setAttribute("data-id", element.isbn); //Add data-id attribute to button
-    btn.addEventListener("click", function () {
-      //Add event listener
-      toggleFavorite(element.isbn);
-    });
+    if (favorites.includes(element.isbn)) {
+      btn.classList.add("added-to-fav");
+      btn.innerText = "💔 Remove from Favorites";
+    }
     newDiv.appendChild(btn);
-    //changes finish
-
     list.appendChild(newDiv);
     newDiv.appendChild(newA);
     newA.appendChild(newH2);
@@ -84,7 +77,13 @@ function renderBooks() {
 // events
 
 list.addEventListener("click", (event) => {
-  console.log(event);
+  console.log(event.target.attributes[1].nodeValue);
+  if (
+    event.target.className === "btn-favorites" ||
+    "btn-favorites added-to-fav"
+  ) {
+    toggleFavorite(event.target.attributes[1].nodeValue);
+  }
 });
 
 // initialization
@@ -96,3 +95,34 @@ function init() {
 }
 
 init();
+
+let favorites = JSON.parse(localStorage.getItem("Favourite Books")) || [];
+
+function toggleFavorite(isbn) {
+  const index = favorites.indexOf(isbn); //find index of book in array
+  if (index === -1) {
+    //if not there, push in
+    favorites.push(isbn);
+  } else {
+    //if there, take out
+    favorites.splice(index, 1);
+  }
+  updateLocalStorage();
+  updateFavoriteButton(isbn);
+}
+
+function updateLocalStorage() {
+  localStorage.setItem("Favourite Books", JSON.stringify(favorites));
+}
+
+function updateFavoriteButton(isbn) {
+  const button = document.querySelector(`button[data-id="${isbn}"]`);
+  console.log(button);
+  if (favorites.includes(isbn)) {
+    button.textContent = "💔 Remove from Favorites";
+    button.classList.add("added-to-fav");
+  } else {
+    button.textContent = "♥️ Add To Favorites";
+    button.classList.remove("added-to-fav");
+  }
+}
