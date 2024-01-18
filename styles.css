@@ -3,6 +3,11 @@
   src: url(assets/KaushanScript-Regular.otf) format("truetype");
 }
 
+* {
+  font-family: "Open Sans";
+  font-size: 12px;
+}
+
 .header-background,
 .header-background * {
   box-sizing: border-box;
@@ -97,14 +102,16 @@ a:visited {
 a:has(h2) {
   color: #b5446e;
   text-decoration: none;
-  font-family: "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 16px;
-  font-weight: 700;
   text-align: center;
 }
 
 a:has(h2):visited {
   color: #b5446e;
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: 700;
 }
 
 .container-flex {
